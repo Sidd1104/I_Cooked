@@ -30,6 +30,18 @@ const Hero = () => {
     { name: 'Contact', href: '#contact' }
   ];
 
+  const handleNavClick = (e, href) => {
+    e.preventDefault();
+    const targetId = href.replace('#', '');
+    const element = document.getElementById(targetId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    } else if (targetId === 'home') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    window.history.pushState(null, '', href);
+  };
+
   useEffect(() => {
     const section = sectionRef.current;
     const card = cardRef.current;
@@ -145,6 +157,7 @@ const Hero = () => {
 
   return (
     <section
+      id="home"
       ref={sectionRef}
       className="relative w-full h-screen bg-[#050505] overflow-hidden flex flex-col justify-between select-none cursor-none"
     >
@@ -233,6 +246,7 @@ const Hero = () => {
             <div className="hero-anim-item flex items-center gap-4 pt-2">
               <a
                 href="#projects"
+                onClick={(e) => handleNavClick(e, '#projects')}
                 className="px-8 py-3.5 bg-white text-black font-bold text-xs uppercase tracking-widest rounded hover:bg-red-600 hover:text-white transition-all duration-300 shadow-[0_10px_35px_rgba(255,255,255,0.3)] flex items-center gap-2 hover:scale-105 active:scale-95"
               >
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -242,6 +256,7 @@ const Hero = () => {
               </a>
               <a
                 href="#contact"
+                onClick={(e) => handleNavClick(e, '#contact')}
                 className="px-8 py-3.5 bg-neutral-900/80 text-white border border-white/20 font-bold text-xs uppercase tracking-widest rounded hover:bg-neutral-800 transition-all duration-300 shadow-xl backdrop-blur-md flex items-center gap-2 hover:scale-105 active:scale-95"
               >
                 <svg className="w-4 h-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
@@ -318,14 +333,19 @@ const Hero = () => {
 
       {/* --- NETFLIX-THEMED DEVELOPER NAVBAR --- */}
       <header className="absolute top-0 left-0 z-50 w-full max-w-7xl mx-auto px-6 md:px-12 py-6 flex items-center justify-between pointer-events-auto">
-        <div className="text-2xl font-black text-red-600 tracking-tighter flex items-center gap-2 drop-shadow-[0_2px_15px_rgba(229,9,20,0.9)]">
+        <a
+          href="#home"
+          onClick={(e) => handleNavClick(e, '#home')}
+          className="text-2xl font-black text-red-600 tracking-tighter flex items-center gap-2 drop-shadow-[0_2px_15px_rgba(229,9,20,0.9)] hover:opacity-90 transition-opacity"
+        >
           SIDDHANT<span className="w-1.5 h-1.5 rounded-full bg-white inline-block"></span>
-        </div>
+        </a>
         <nav className="hidden md:flex items-center gap-8 text-xs font-mono uppercase tracking-widest text-white/80">
           {navLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
+              onClick={(e) => handleNavClick(e, link.href)}
               className="hover:text-red-500 transition-colors"
             >
               {link.name}
@@ -333,7 +353,8 @@ const Hero = () => {
           ))}
         </nav>
         <a
-          href="#hire"
+          href="#contact"
+          onClick={(e) => handleNavClick(e, '#contact')}
           className="px-5 py-2 rounded bg-red-600 hover:bg-red-700 text-white font-bold text-xs uppercase tracking-widest transition-all duration-300 shadow-[0_0_20px_rgba(229,9,20,0.6)] hover:scale-105 active:scale-95"
         >
           Hire Me

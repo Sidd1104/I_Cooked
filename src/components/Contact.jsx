@@ -1,12 +1,8 @@
 import React, { useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
-// =========================================================================
-// FORMSPREE CONFIGURATION:
-// To enable real email delivery, create a free form endpoint at https://formspree.io/
-// and replace "YOUR_FORM_ID" below with your actual Formspree form ID (e.g. "xpzgkbyw").
-// =========================================================================
-const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
+// Formspree production endpoint
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/xgaegwel";
 
 const Contact = () => {
   const ref = useRef(null);
@@ -20,7 +16,7 @@ const Contact = () => {
     permission: false
   });
 
-  const [status, setStatus] = useState('idle'); // 'idle' | 'submitting' | 'success' | 'error'
+  const [status, setStatus] = useState('idle'); // 'idle' | 'sending' | 'success' | 'error'
   const [errorMessage, setErrorMessage] = useState('');
 
   const { scrollYProgress } = useScroll({
@@ -38,7 +34,7 @@ const Contact = () => {
       ...prev,
       [id]: type === 'checkbox' ? checked : value
     }));
-    // Reset any previous error when user resumes editing
+    // Reset error state on editing
     if (status === 'error') {
       setStatus('idle');
       setErrorMessage('');
@@ -55,7 +51,7 @@ const Contact = () => {
       return;
     }
 
-    setStatus('submitting');
+    setStatus('sending');
     setErrorMessage('');
 
     try {
@@ -66,11 +62,12 @@ const Contact = () => {
           'Accept': 'application/json'
         },
         body: JSON.stringify({
-          name: `${formData.firstName} ${formData.lastName}`.trim(),
           firstName: formData.firstName,
           lastName: formData.lastName,
+          name: `${formData.firstName} ${formData.lastName}`.trim(),
           email: formData.email,
-          message: formData.message
+          message: formData.message,
+          permission: formData.permission
         })
       });
 
@@ -82,12 +79,12 @@ const Contact = () => {
         setStatus('error');
         setErrorMessage(
           data?.errors?.[0]?.message || 
-          "Transmission could not be completed. Please verify your Formspree endpoint ID or reach out directly at SIDDMJ07@GMAIL.COM."
+          "Something went wrong — please try again or email me directly at SIDDMJ07@GMAIL.COM."
         );
       }
-    } catch (err) {
+    } catch (error) {
       setStatus('error');
-      setErrorMessage("Network error during transmission. Please try again or email directly at SIDDMJ07@GMAIL.COM.");
+      setErrorMessage("Something went wrong — please try again or email me directly at SIDDMJ07@GMAIL.COM.");
     }
   };
 
@@ -161,176 +158,180 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* Inline Feedback States (Success / Error) */}
-          {status === 'success' && (
-            <div className="mb-8 p-4 rounded-xl bg-red-600/15 border border-red-600/40 text-white flex items-center justify-between gap-4 shadow-[0_0_20px_rgba(229,9,20,0.2)]">
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-red-600/30 border border-red-500/50 flex items-center justify-center shrink-0 text-red-400">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-                <div>
-                  <p className="text-xs font-mono font-bold uppercase tracking-wider text-red-400">
-                    TRANSMISSION SUCCESSFUL // SIGNAL DISPATCHED
-                  </p>
-                  <p className="text-xs text-white/80 font-light">
-                    Thank you! Your message has been routed. I'll get back to you shortly.
-                  </p>
-                </div>
+          {/* Inline Feedback States */}
+          {status === 'success' ? (
+            <div className="py-14 px-8 rounded-2xl bg-red-600/10 border border-red-600/40 text-center flex flex-col items-center justify-center space-y-5 my-6 shadow-[0_0_35px_rgba(229,9,20,0.25)]">
+              <div className="w-14 h-14 rounded-full bg-red-600/20 border border-red-500/50 flex items-center justify-center text-red-500 shadow-[0_0_20px_rgba(229,9,20,0.4)]">
+                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 13l4 4L19 7" />
+                </svg>
               </div>
-              <button 
-                type="button" 
-                onClick={() => setStatus('idle')}
-                className="text-[11px] font-mono uppercase tracking-widest text-white/60 hover:text-white underline underline-offset-4 shrink-0 transition-colors"
-              >
-                Send Another
-              </button>
-            </div>
-          )}
-
-          {status === 'error' && (
-            <div className="mb-8 p-4 rounded-xl bg-red-950/40 border border-red-500/40 text-white flex items-center justify-between gap-4 shadow-[0_0_20px_rgba(229,9,20,0.15)]">
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-red-600/20 border border-red-500/40 flex items-center justify-center shrink-0 text-red-400">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                  </svg>
-                </div>
-                <div>
-                  <p className="text-xs font-mono font-bold uppercase tracking-wider text-red-400">
-                    TRANSMISSION NOTICE
-                  </p>
-                  <p className="text-xs text-white/80 font-light">
-                    {errorMessage || "Submission error. Please email directly at SIDDMJ07@GMAIL.COM."}
-                  </p>
-                </div>
-              </div>
-              <button 
-                type="button" 
-                onClick={() => setStatus('idle')}
-                className="text-white/40 hover:text-white text-lg px-1 transition-colors"
-                aria-label="Dismiss notice"
-              >
-                &times;
-              </button>
-            </div>
-          )}
-
-          <form onSubmit={handleSubmit} className="flex flex-col gap-12 md:gap-16 w-full">
-            <div className="flex flex-col md:flex-row gap-12 md:gap-20 w-full">
-              
-              {/* Left Column */}
-              <div className="flex-1 flex flex-col gap-10">
-                <div className="relative">
-                  <input 
-                    type="text" 
-                    id="firstName" 
-                    name="firstName"
-                    value={formData.firstName}
-                    onChange={handleChange}
-                    placeholder="First Name" 
-                    required
-                    className="w-full bg-transparent border-b border-white/20 pb-3 text-lg focus:outline-none focus:border-red-600 transition-colors placeholder-white/40 font-medium rounded-none text-white"
-                  />
-                </div>
-                <div className="relative">
-                  <input 
-                    type="text" 
-                    id="lastName" 
-                    name="lastName"
-                    value={formData.lastName}
-                    onChange={handleChange}
-                    placeholder="Last Name" 
-                    required
-                    className="w-full bg-transparent border-b border-white/20 pb-3 text-lg focus:outline-none focus:border-red-600 transition-colors placeholder-white/40 font-medium rounded-none text-white"
-                  />
-                </div>
-                <div className="relative">
-                  <input 
-                    type="email" 
-                    id="email" 
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="Email Address" 
-                    required
-                    className="w-full bg-transparent border-b border-white/20 pb-3 text-lg focus:outline-none focus:border-red-600 transition-colors placeholder-white/40 font-medium rounded-none text-white"
-                  />
-                </div>
-              </div>
-
-              {/* Right Column */}
-              <div className="flex-1 flex flex-col">
-                <div className="relative h-full flex flex-col">
-                  <textarea 
-                    id="message" 
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    placeholder="Type your message here..." 
-                    required
-                    className="w-full h-full min-h-[140px] bg-transparent border-b border-white/20 pb-3 text-lg focus:outline-none focus:border-red-600 transition-colors placeholder-white/40 font-medium resize-none rounded-none text-white"
-                  ></textarea>
-                </div>
-              </div>
-            </div>
-
-            {/* Bottom Section */}
-            <div className="flex flex-col md:flex-row gap-12 mt-4 pt-6 border-t border-white/10">
-              {/* Left text */}
-              <div className="flex-1 flex items-start gap-4 text-sm font-light text-white/70">
-                <input 
-                  type="checkbox" 
-                  id="permission" 
-                  checked={formData.permission}
-                  onChange={handleChange}
-                  className="mt-1 w-4 h-4 rounded-sm border-white/30 bg-transparent text-red-600 focus:ring-0 focus:ring-offset-0 cursor-pointer" 
-                  style={{ accentColor: "#E50914" }}
-                />
-                <label htmlFor="permission" className="cursor-pointer max-w-[280px] leading-snug">
-                  I give permission to contact me at this email address.
-                </label>
-              </div>
-
-              {/* Right text & button */}
-              <div className="flex-1 flex flex-col gap-8 text-xs text-white/50 font-light">
-                <p className="leading-relaxed max-w-[400px]">
-                  This site is protected by security protocols and industry-standard privacy guidelines.
+              <div className="space-y-2">
+                <h3 className="text-2xl font-bold font-mono tracking-tight text-white uppercase">
+                  Signal Transmitted
+                </h3>
+                <p className="text-sm text-white/80 font-light max-w-md">
+                  Message sent — I'll get back to you soon.
                 </p>
-                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-end gap-6">
-                  <p className="max-w-[250px] leading-relaxed">
-                    Ready to start a project or collaboration? Send a direct signal.
-                  </p>
-                  
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  setStatus('idle');
+                  setFormData({ firstName: '', lastName: '', email: '', message: '', permission: false });
+                }}
+                className="mt-2 px-6 py-2.5 rounded bg-white/10 hover:bg-white/20 border border-white/20 text-xs font-mono uppercase tracking-widest text-white transition-all hover:scale-105"
+              >
+                Send Another Message
+              </button>
+            </div>
+          ) : (
+            <>
+              {status === 'error' && (
+                <div className="mb-8 p-4 rounded-xl bg-red-950/40 border border-red-500/40 text-white flex items-center justify-between gap-4 shadow-[0_0_20px_rgba(229,9,20,0.15)]">
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-full bg-red-600/20 border border-red-500/40 flex items-center justify-center shrink-0 text-red-400">
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="text-xs font-mono font-bold uppercase tracking-wider text-red-400">
+                        TRANSMISSION NOTICE
+                      </p>
+                      <p className="text-xs text-white/80 font-light">
+                        {errorMessage || "Something went wrong — please try again or email me directly at SIDDMJ07@GMAIL.COM."}
+                      </p>
+                    </div>
+                  </div>
                   <button 
-                    type="submit" 
-                    disabled={status === 'submitting'}
-                    className={`px-8 py-3.5 rounded bg-red-600 text-white font-bold uppercase tracking-widest text-xs flex items-center justify-center gap-3 transition-all duration-300 group whitespace-nowrap shadow-[0_0_20px_rgba(229,9,20,0.6)] ${
-                      status === 'submitting' ? 'opacity-60 cursor-not-allowed' : 'hover:bg-red-700 hover:scale-105'
-                    }`}
+                    type="button" 
+                    onClick={() => setStatus('idle')}
+                    className="text-white/40 hover:text-white text-lg px-1 transition-colors"
+                    aria-label="Dismiss notice"
                   >
-                    {status === 'submitting' ? (
-                      <>
-                        <svg className="w-4 h-4 animate-spin text-white" fill="none" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" strokeWidth="4" stroke="currentColor"></circle>
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                        <span>Transmitting...</span>
-                      </>
-                    ) : (
-                      <>
-                        <span>Send Message</span>
-                        <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                        </svg>
-                      </>
-                    )}
+                    &times;
                   </button>
                 </div>
-              </div>
-            </div>
-          </form>
+              )}
+
+              <form onSubmit={handleSubmit} className="flex flex-col gap-12 md:gap-16 w-full">
+                <div className="flex flex-col md:flex-row gap-12 md:gap-20 w-full">
+                  
+                  {/* Left Column */}
+                  <div className="flex-1 flex flex-col gap-10">
+                    <div className="relative">
+                      <input 
+                        type="text" 
+                        id="firstName" 
+                        name="firstName"
+                        value={formData.firstName}
+                        onChange={handleChange}
+                        placeholder="First Name" 
+                        required
+                        className="w-full bg-transparent border-b border-white/20 pb-3 text-lg focus:outline-none focus:border-red-600 transition-colors placeholder-white/40 font-medium rounded-none text-white"
+                      />
+                    </div>
+                    <div className="relative">
+                      <input 
+                        type="text" 
+                        id="lastName" 
+                        name="lastName"
+                        value={formData.lastName}
+                        onChange={handleChange}
+                        placeholder="Last Name" 
+                        required
+                        className="w-full bg-transparent border-b border-white/20 pb-3 text-lg focus:outline-none focus:border-red-600 transition-colors placeholder-white/40 font-medium rounded-none text-white"
+                      />
+                    </div>
+                    <div className="relative">
+                      <input 
+                        type="email" 
+                        id="email" 
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        placeholder="Email Address" 
+                        required
+                        className="w-full bg-transparent border-b border-white/20 pb-3 text-lg focus:outline-none focus:border-red-600 transition-colors placeholder-white/40 font-medium rounded-none text-white"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Right Column */}
+                  <div className="flex-1 flex flex-col">
+                    <div className="relative h-full flex flex-col">
+                      <textarea 
+                        id="message" 
+                        name="message"
+                        value={formData.message}
+                        onChange={handleChange}
+                        placeholder="Type your message here..." 
+                        required
+                        className="w-full h-full min-h-[140px] bg-transparent border-b border-white/20 pb-3 text-lg focus:outline-none focus:border-red-600 transition-colors placeholder-white/40 font-medium resize-none rounded-none text-white"
+                      ></textarea>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Bottom Section */}
+                <div className="flex flex-col md:flex-row gap-12 mt-4 pt-6 border-t border-white/10">
+                  {/* Left text */}
+                  <div className="flex-1 flex items-start gap-4 text-sm font-light text-white/70">
+                    <input 
+                      type="checkbox" 
+                      id="permission" 
+                      name="permission"
+                      checked={formData.permission}
+                      onChange={handleChange}
+                      className="mt-1 w-4 h-4 rounded-sm border-white/30 bg-transparent text-red-600 focus:ring-0 focus:ring-offset-0 cursor-pointer" 
+                      style={{ accentColor: "#E50914" }}
+                    />
+                    <label htmlFor="permission" className="cursor-pointer max-w-[280px] leading-snug">
+                      I give permission to contact me at this email address.
+                    </label>
+                  </div>
+
+                  {/* Right text & button */}
+                  <div className="flex-1 flex flex-col gap-8 text-xs text-white/50 font-light">
+                    <p className="leading-relaxed max-w-[400px]">
+                      This site is protected by security protocols and industry-standard privacy guidelines.
+                    </p>
+                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-end gap-6">
+                      <p className="max-w-[250px] leading-relaxed">
+                        Ready to start a project or collaboration? Send a direct signal.
+                      </p>
+                      
+                      <button 
+                        type="submit" 
+                        disabled={status === 'sending'}
+                        className={`px-8 py-3.5 rounded bg-red-600 text-white font-bold uppercase tracking-widest text-xs flex items-center justify-center gap-3 transition-all duration-300 group whitespace-nowrap shadow-[0_0_20px_rgba(229,9,20,0.6)] ${
+                          status === 'sending' ? 'opacity-60 cursor-not-allowed' : 'hover:bg-red-700 hover:scale-105'
+                        }`}
+                      >
+                        {status === 'sending' ? (
+                          <>
+                            <svg className="w-4 h-4 animate-spin text-white" fill="none" viewBox="0 0 24 24">
+                              <circle className="opacity-25" cx="12" cy="12" r="10" strokeWidth="4" stroke="currentColor"></circle>
+                              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            <span>Sending...</span>
+                          </>
+                        ) : (
+                          <>
+                            <span>Send Message</span>
+                            <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                          </>
+                        )}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </>
+          )}
 
         </motion.div>
       </div>

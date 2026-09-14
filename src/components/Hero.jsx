@@ -26,6 +26,7 @@ const Hero = () => {
     { name: 'Projects', href: '#projects' },
     { name: 'Experience', href: '#experience' },
     { name: 'Education', href: '#education' },
+    { name: 'Achievements', href: '#achievements' },
     { name: 'Contact', href: '#contact' }
   ];
 

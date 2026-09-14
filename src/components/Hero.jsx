@@ -332,44 +332,41 @@ const Hero = () => {
       ></div>
 
       {/* --- NETFLIX-THEMED DEVELOPER NAVBAR --- */}
-      <header className="absolute top-0 left-0 z-50 w-full max-w-7xl mx-auto px-6 md:px-12 py-6 flex items-center justify-between pointer-events-auto">
+      <header className="absolute top-0 left-0 z-50 w-full max-w-[1400px] mx-auto px-6 md:px-8 xl:px-12 py-6 flex items-center justify-between pointer-events-auto">
         <a
           href="#home"
           onClick={(e) => handleNavClick(e, '#home')}
-          className="text-2xl font-black text-red-600 tracking-tighter flex items-center gap-2 drop-shadow-[0_2px_15px_rgba(229,9,20,0.9)] hover:opacity-90 transition-opacity"
+          className="text-2xl font-black text-red-600 tracking-tighter flex items-center gap-2 drop-shadow-[0_2px_15px_rgba(229,9,20,0.9)] hover:opacity-90 transition-opacity shrink-0"
         >
           SIDDHANT<span className="w-1.5 h-1.5 rounded-full bg-white inline-block"></span>
         </a>
-        <nav className="hidden md:flex items-center gap-8 text-xs font-mono uppercase tracking-widest text-white/80">
+        <nav className="hidden md:flex items-center gap-5 lg:gap-6 xl:gap-8 text-xs font-mono uppercase tracking-widest text-white/80">
           {navLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
               onClick={(e) => handleNavClick(e, link.href)}
-              className="hover:text-red-500 transition-colors"
+              className="hover:text-red-500 transition-colors whitespace-nowrap"
             >
               {link.name}
             </a>
           ))}
         </nav>
-        <div className="flex items-center gap-3">
-          <a
-            href="/resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-4 py-2 rounded border border-white/20 hover:border-red-600 hover:bg-red-600/10 text-white font-bold text-xs font-mono uppercase tracking-widest transition-all duration-300 hover:scale-105 active:scale-95 flex items-center gap-1.5"
-          >
-            <svg className="w-3.5 h-3.5 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-            </svg>
-            Resume
-          </a>
+        <div className="flex items-center gap-3 shrink-0">
           <a
             href="#contact"
             onClick={(e) => handleNavClick(e, '#contact')}
             className="px-5 py-2 rounded bg-red-600 hover:bg-red-700 text-white font-bold text-xs uppercase tracking-widest transition-all duration-300 shadow-[0_0_20px_rgba(229,9,20,0.6)] hover:scale-105 active:scale-95"
           >
             Hire Me
+          </a>
+          <a
+            href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-5 py-2 rounded bg-red-600 hover:bg-red-700 text-white font-bold text-xs uppercase tracking-widest transition-all duration-300 shadow-[0_0_20px_rgba(229,9,20,0.6)] hover:scale-105 active:scale-95"
+          >
+            Resume
           </a>
         </div>
       </header>

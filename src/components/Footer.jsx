@@ -56,14 +56,6 @@ const Footer = () => {
                 {link.name}
               </a>
             ))}
-            <a
-              href="/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white hover:text-red-500 transition-colors border border-white/20 hover:border-red-600 px-3 py-1 rounded bg-white/5 hover:bg-red-600/10 flex items-center gap-1.5 font-bold"
-            >
-              Resume ↗
-            </a>
           </nav>
         </div>
 

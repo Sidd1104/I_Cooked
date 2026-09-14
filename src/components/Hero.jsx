@@ -18,6 +18,17 @@ const Hero = () => {
     'ACCLAIMED // ALGORITHMIC PROBLEM SOLVER'
   ];
 
+  const navLinks = [
+    { name: 'Home', href: '#home' },
+    { name: 'About', href: '#about' },
+    { name: 'Expertise', href: '#expertise' },
+    { name: 'Skills', href: '#skills' },
+    { name: 'Projects', href: '#projects' },
+    { name: 'Experience', href: '#experience' },
+    { name: 'Education', href: '#education' },
+    { name: 'Contact', href: '#contact' }
+  ];
+
   useEffect(() => {
     const section = sectionRef.current;
     const card = cardRef.current;
@@ -310,13 +321,15 @@ const Hero = () => {
           SIDDHANT<span className="w-1.5 h-1.5 rounded-full bg-white inline-block"></span>
         </div>
         <nav className="hidden md:flex items-center gap-8 text-xs font-mono uppercase tracking-widest text-white/80">
-          <a href="#home" className="hover:text-red-500 transition-colors">Home</a>
-          <a href="#about" className="hover:text-red-500 transition-colors">About</a>
-          <a href="#expertise" className="hover:text-red-500 transition-colors">Expertise</a>
-          <a href="#skills" className="hover:text-red-500 transition-colors">Skills</a>
-          <a href="#projects" className="hover:text-red-500 transition-colors">Projects</a>
-          <a href="#experience" className="hover:text-red-500 transition-colors">Experience</a>
-          <a href="#contact" className="hover:text-red-500 transition-colors">Contact</a>
+          {navLinks.map((link) => (
+            <a
+              key={link.name}
+              href={link.href}
+              className="hover:text-red-500 transition-colors"
+            >
+              {link.name}
+            </a>
+          ))}
         </nav>
         <a
           href="#hire"

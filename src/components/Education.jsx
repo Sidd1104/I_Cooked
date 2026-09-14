@@ -102,32 +102,22 @@ const Education = () => {
           }
         );
 
-        const TARGET_CGPA = 8.54;
         const counterObj = { val: 0 };
-        gsap.fromTo(
-          counterObj,
-          { val: 0 },
-          {
-            val: TARGET_CGPA,
-            duration: 1.4,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: cgpaBadgeRef.current,
-              start: "top 90%",
-              once: true
-            },
-            onUpdate: () => {
-              if (cgpaNumberRef.current) {
-                cgpaNumberRef.current.textContent = counterObj.val.toFixed(2);
-              }
-            },
-            onComplete: () => {
-              if (cgpaNumberRef.current) {
-                cgpaNumberRef.current.textContent = TARGET_CGPA.toFixed(2);
-              }
+        gsap.to(counterObj, {
+          val: 8.54,
+          duration: 2.2,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: cgpaBadgeRef.current,
+            start: "top 85%",
+            toggleActions: "play none none reverse"
+          },
+          onUpdate: () => {
+            if (cgpaNumberRef.current) {
+              cgpaNumberRef.current.textContent = counterObj.val.toFixed(2);
             }
           }
-        );
+        });
       }
 
       // 5. SUBTLE 3D TILT ON HOVER FOR CARDS
@@ -238,7 +228,7 @@ const Education = () => {
 
             {/* Central Transition Indicator */}
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center gap-2 px-3 py-1 rounded-full bg-[#0d0d0d] border border-white/15 text-[10px] font-mono text-white/50 tracking-wider shadow-lg">
-              <span>ACADEMIC PROGRESSION</span>
+              <span>TWELVE-YEAR TRANSITION</span>
               <span className="text-red-500">→</span>
             </div>
 
@@ -260,7 +250,7 @@ const Education = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 relative z-10">
 
             {/* ------------------------------------------------------------- */}
-            {/* NODE 1: KENDRIYA VIDYALAYA (Feb 2013 – Mar 2023) */}
+            {/* NODE 1: KENDRIYA VIDYALAYA (2011 - 2023) */}
             {/* ------------------------------------------------------------- */}
             <div
               ref={node1Ref}
@@ -285,12 +275,12 @@ const Education = () => {
                       FOUNDATIONAL TENURE
                     </span>
                     <span className="text-xs font-mono text-white/40">
-                      EP 01 // 2013 – 2023
+                      EP 01 // 2011 – 2023
                     </span>
                   </div>
 
                   <span className="px-3 py-1 rounded-full bg-white/5 border border-white/15 text-xs font-mono text-red-400 font-bold tracking-wide">
-                    Feb 2013 – Mar 2023
+                    2011 – 2023
                   </span>
                 </div>
 
@@ -306,7 +296,7 @@ const Education = () => {
                 <div className="flex items-center gap-2 text-base md:text-lg text-white/90 font-medium">
                   <span className="text-white font-bold">Kendriya Vidyalaya</span>
                   <span className="text-white/30">•</span>
-                  <span className="text-xs font-mono text-white/60">Feb 2013 – Mar 2023</span>
+                  <span className="text-xs font-mono text-white/60">12-Year Tenure (Class 1 – 12)</span>
                 </div>
               </div>
 
@@ -434,7 +424,7 @@ const Education = () => {
                           ref={cgpaNumberRef}
                           className="text-4xl md:text-5xl font-black text-white font-mono tracking-tight drop-shadow-[0_0_20px_rgba(229,9,20,0.8)]"
                         >
-                          8.54
+                          0.00
                         </span>
                         <span className="text-sm font-black text-red-500 font-mono">/ 10</span>
                       </div>

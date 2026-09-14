@@ -45,7 +45,7 @@ const Footer = () => {
           </div>
 
           {/* Quick Navigation Links */}
-          <nav className="flex flex-wrap gap-6 md:gap-8 text-xs font-mono uppercase tracking-widest text-white/70">
+          <nav className="flex flex-wrap items-center gap-6 md:gap-8 text-xs font-mono uppercase tracking-widest text-white/70">
             {footerNavLinks.map((link) => (
               <a
                 key={link.name}
@@ -56,12 +56,28 @@ const Footer = () => {
                 {link.name}
               </a>
             ))}
+            <a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white hover:text-red-500 transition-colors border border-white/20 hover:border-red-600 px-3 py-1 rounded bg-white/5 hover:bg-red-600/10 flex items-center gap-1.5 font-bold"
+            >
+              Resume ↗
+            </a>
           </nav>
         </div>
 
         {/* Middle Section: Socials & External Profiles */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 text-xs font-mono text-white/60">
-          <div className="flex items-center gap-6">
+          <div className="flex flex-wrap items-center gap-6">
+            <a 
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white hover:text-red-500 transition-colors uppercase tracking-wider font-bold flex items-center gap-1"
+            >
+              Resume ↗ //
+            </a>
             <a 
               href="https://github.com/Sidd1104" 
               target="_blank" 

@@ -71,7 +71,7 @@ const technicalAchievements = [
     )
   },
   {
-    title: "4 Completed Internships",
+    title: "4 Internships Completed",
     category: "INDUSTRY PRODUCTION",
     metric: "4x INTERN",
     detail: "Delivered production software across Thinkverse Labs, Infotact Solutions, and Sharp Economy, mastering full-stack React, Node.js, C#, and AI modeling.",

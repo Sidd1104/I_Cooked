@@ -143,7 +143,7 @@ const About = () => {
               <ul className="space-y-3 text-xs md:text-sm text-white/80 font-light">
                 <li className="flex items-start gap-2.5">
                   <span className="text-red-500 font-bold shrink-0">&#8250;</span>
-                  <span><strong className="text-white font-medium">4 Completed Internships</strong> <span className="text-white/60">(Thinkverse Labs, Infotact Solutions, Sharp Economy)</span></span>
+                  <span><strong className="text-white font-medium">4 Internships Completed</strong> <span className="text-white/60">(Thinkverse Labs, Infotact Solutions, Sharp Economy)</span></span>
                 </li>
                 <li className="flex items-start gap-2.5">
                   <span className="text-red-500 font-bold shrink-0">&#8250;</span>

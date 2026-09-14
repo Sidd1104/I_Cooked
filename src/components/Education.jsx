@@ -238,7 +238,7 @@ const Education = () => {
 
             {/* Central Transition Indicator */}
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center gap-2 px-3 py-1 rounded-full bg-[#0d0d0d] border border-white/15 text-[10px] font-mono text-white/50 tracking-wider shadow-lg">
-              <span>TEN-YEAR TRANSITION</span>
+              <span>TWELVE-YEAR TRANSITION</span>
               <span className="text-red-500">→</span>
             </div>
 
@@ -260,7 +260,7 @@ const Education = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 relative z-10">
 
             {/* ------------------------------------------------------------- */}
-            {/* NODE 1: KENDRIYA VIDYALAYA (2013 - 2023) */}
+            {/* NODE 1: KENDRIYA VIDYALAYA (2011 - 2023) */}
             {/* ------------------------------------------------------------- */}
             <div
               ref={node1Ref}
@@ -285,12 +285,12 @@ const Education = () => {
                       FOUNDATIONAL TENURE
                     </span>
                     <span className="text-xs font-mono text-white/40">
-                      EP 01 // 2013 – 2023
+                      EP 01 // 2011 – 2023
                     </span>
                   </div>
 
                   <span className="px-3 py-1 rounded-full bg-white/5 border border-white/15 text-xs font-mono text-red-400 font-bold tracking-wide">
-                    2013 – 2023
+                    2011 – 2023
                   </span>
                 </div>
 
@@ -306,7 +306,7 @@ const Education = () => {
                 <div className="flex items-center gap-2 text-base md:text-lg text-white/90 font-medium">
                   <span className="text-white font-bold">Kendriya Vidyalaya</span>
                   <span className="text-white/30">•</span>
-                  <span className="text-xs font-mono text-white/60">10-Year Tenure (Class 1 – 12)</span>
+                  <span className="text-xs font-mono text-white/60">12-Year Tenure (Class 1 – 12)</span>
                 </div>
               </div>
 

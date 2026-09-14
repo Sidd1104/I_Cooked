@@ -39,7 +39,7 @@ const technicalAchievements = [
     detail: "High-cadence engineering output across public and enterprise repositories, building scalable microservices, AI pipelines, and React architectures.",
     tag: "CODE ARSENAL",
     icon: (
-      <svg className="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg className="w-4 h-4 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <circle cx="12" cy="12" r="4" strokeWidth="2" />
         <line x1="1.05" y1="12" x2="7" y2="12" strokeWidth="2" />
         <line x1="17.01" y1="12" x2="22.96" y2="12" strokeWidth="2" />
@@ -53,7 +53,7 @@ const technicalAchievements = [
     detail: "Designed, engineered, and shipped 6 production systems including DocuMind AI, SplitSphere group finance, and real-time collaboration platforms.",
     tag: "SYSTEMS LAUNCHED",
     icon: (
-      <svg className="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg className="w-4 h-4 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
       </svg>
     )
@@ -65,7 +65,7 @@ const technicalAchievements = [
     detail: "Formally certified in enterprise routing protocols, switching architectures, IP services, cybersecurity fundamentals, and network programmability.",
     tag: "INDUSTRY CREDENTIAL",
     icon: (
-      <svg className="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg className="w-4 h-4 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
       </svg>
     )
@@ -77,11 +77,42 @@ const technicalAchievements = [
     detail: "Delivered production software across Thinkverse Labs, Infotact Solutions, and Sharp Economy, mastering full-stack React, Node.js, C#, and AI modeling.",
     tag: "COMMERCIAL IMPACT",
     icon: (
-      <svg className="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg className="w-4 h-4 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <rect x="2" y="7" width="20" height="14" rx="2" ry="2" strokeWidth="2" />
         <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" strokeWidth="2" />
       </svg>
     )
+  }
+];
+
+const certificationAchievements = [
+  {
+    title: "AI and Prompt Engineering Bootcamp",
+    issuer: "GL Bajaj Institute of Management",
+    date: "Sep 2025",
+    category: "PROMPT ENG & GENAI",
+    status: "CERTIFIED"
+  },
+  {
+    title: "Front End Web Development Training",
+    issuer: "GL Bajaj Institute of Management",
+    date: "Apr 2025",
+    category: "FRONT-END ARCHITECTURE",
+    status: "VERIFIED"
+  },
+  {
+    title: "Cisco Certified Network Associate Cyber Ops (CCNA)",
+    issuer: "Cisco Networking Academy",
+    date: "Sep 2025",
+    category: "CYBER OPS & NETWORKS",
+    status: "OFFICIAL"
+  },
+  {
+    title: "Building GenAI Applications with MongoDB",
+    issuer: "MongoDB",
+    date: "Sep 2025",
+    category: "VECTOR SEARCH & GENAI",
+    status: "CREDENTIAL"
   }
 ];
 
@@ -93,7 +124,7 @@ const Achievements = () => {
     if (!section) return;
 
     let ctx = gsap.context(() => {
-      // Grab all achievement card wrappers
+      // Grab all achievement card wrappers across all 3 panels
       const cardWrappers = section.querySelectorAll('.achievement-card-wrapper');
 
       cardWrappers.forEach((wrapper, index) => {
@@ -123,7 +154,7 @@ const Achievements = () => {
             start: "top 85%",
             toggleActions: "play none none reverse"
           },
-          delay: (index % 2) * 0.16 + Math.floor(index / 2) * 0.12
+          delay: (index % 3) * 0.12 + Math.floor(index / 3) * 0.08
         });
 
         // a) 3D Flip reveal from rotateY 85deg to 0deg
@@ -135,7 +166,7 @@ const Achievements = () => {
         })
         // e) Subtle elastic scale bounce (0.9 -> 1.05 -> 1.0)
         .to(card, {
-          scale: 1.05,
+          scale: 1.04,
           duration: 0.35,
           ease: "back.out(2.2)"
         }, "-=0.55")
@@ -230,21 +261,21 @@ const Achievements = () => {
           </p>
         </div>
 
-        {/* Dual Panel Grid (Two Panels Side by Side) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
+        {/* 3-Panel Responsive Grid (3 Columns on Desktop, Stacked Single Column on Mobile) */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-start">
 
           {/* ========================================================================= */}
-          {/* PANEL 1 — ACADEMIC EXCELLENCE (Span 5) */}
+          {/* PANEL 1 — ACADEMIC EXCELLENCE */}
           {/* ========================================================================= */}
-          <div className="lg:col-span-5 flex flex-col space-y-6">
+          <div className="flex flex-col space-y-5">
             
             {/* Panel Header */}
             <div className="flex items-center justify-between pb-3 border-b border-white/10">
               <div className="space-y-1">
                 <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-red-500 px-2 py-0.5 rounded bg-red-600/10 border border-red-600/30">
-                  TIER 01 // UNIVERSITY DISTINCTION
+                  TIER 01 // UNIVERSITY
                 </span>
-                <h3 className="text-2xl font-black text-white tracking-tight pt-1">
+                <h3 className="text-xl md:text-2xl font-black text-white tracking-tight pt-1">
                   ACADEMIC EXCELLENCE
                 </h3>
               </div>
@@ -252,121 +283,8 @@ const Achievements = () => {
             </div>
 
             {/* Academic Achievement Cards */}
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-5">
               {academicAchievements.map((item, index) => (
-                <div
-                  key={index}
-                  className="achievement-card-wrapper relative perspective-[1200px]"
-                >
-                  {/* Glowing Outline Pulse Effect on Unlock */}
-                  <div className="achievement-glow absolute -inset-0.5 rounded-[26px] bg-gradient-to-r from-red-600 via-rose-500 to-red-600 opacity-0 pointer-events-none blur-md z-0" />
-
-                  {/* 3D Flipping Card Container */}
-                  <div
-                    className="achievement-card relative p-7 md:p-8 rounded-[24px] bg-gradient-to-br from-[#1d0a0c] via-[#121212] to-[#0a0a0a] border border-white/10 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.85)] hover:border-red-600/60 transition-colors duration-300 overflow-hidden transform-gpu will-change-transform"
-                  >
-                    {/* Real-Time Magnetic Mouse Spotlight */}
-                    <div
-                      className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"
-                      style={{
-                        background: 'radial-gradient(400px circle at var(--mouse-x) var(--mouse-y), rgba(229,9,20,0.18), transparent 70%)'
-                      }}
-                    />
-
-                    {/* Top Crimson Accent Stripe */}
-                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-[2px] bg-gradient-to-r from-transparent via-red-600 to-transparent z-10" />
-
-                    {/* Diagonal Loot-Box Unlock Shine Sweep */}
-                    <div
-                      className="achievement-shine absolute inset-0 pointer-events-none z-30 opacity-0 rounded-[24px]"
-                      style={{
-                        background: 'linear-gradient(115deg, transparent 20%, rgba(255,255,255,0.4) 45%, rgba(229,9,20,0.6) 50%, rgba(255,255,255,0.4) 55%, transparent 80%)'
-                      }}
-                    />
-
-                    {/* Locked State Overlay Badge */}
-                    <div className="achievement-lock-overlay absolute top-5 right-5 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/80 border border-white/20 text-white/50 text-[10px] font-mono uppercase tracking-widest z-20">
-                      <svg className="w-3 h-3 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" strokeWidth="2" />
-                        <path d="M7 11V7a5 5 0 0 1 10 0v4" strokeWidth="2" />
-                      </svg>
-                      <span>LOCKED</span>
-                    </div>
-
-                    {/* Unlocked State Badge (Checkmark / Star) */}
-                    <div className="achievement-unlocked-badge absolute top-5 right-5 flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-600/20 border border-red-500/50 text-red-400 text-[10px] font-mono font-bold uppercase tracking-widest z-20 shadow-[0_0_15px_rgba(229,9,20,0.4)]">
-                      <svg className="w-3.5 h-3.5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                      </svg>
-                      <span>UNLOCKED</span>
-                    </div>
-
-                    {/* Card Content */}
-                    <div className="relative z-10 space-y-4">
-                      
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-xl bg-red-600/10 border border-red-600/30 flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(229,9,20,0.2)]">
-                          {item.icon}
-                        </div>
-                        <div className="space-y-0.5">
-                          <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-red-400 block">
-                            {item.category}
-                          </span>
-                          <span className="text-xs font-mono text-white/40">
-                            {item.tag}
-                          </span>
-                        </div>
-                      </div>
-
-                      <h4 className="text-2xl font-black text-white tracking-tight hover:text-red-500 transition-colors">
-                        {item.title}
-                      </h4>
-
-                      <p className="text-xs md:text-sm text-white/70 font-light leading-relaxed">
-                        {item.detail}
-                      </p>
-
-                      <div className="pt-2 flex items-center justify-between border-t border-white/10">
-                        <span className="text-[11px] font-mono text-white/40 uppercase tracking-wider">
-                          Official Standing:
-                        </span>
-                        <span className="px-3 py-1 rounded-lg bg-red-600/15 border border-red-600/40 text-xs font-mono font-bold text-red-400 shadow-[0_0_12px_rgba(229,9,20,0.3)]">
-                          {item.metric}
-                        </span>
-                      </div>
-
-                    </div>
-
-                    {/* Corner Accent Dot */}
-                    <div className="absolute bottom-3 right-3 w-1.5 h-1.5 rounded-full bg-red-600 shadow-[0_0_8px_#E50914]" />
-                  </div>
-                </div>
-              ))}
-            </div>
-
-          </div>
-
-          {/* ========================================================================= */}
-          {/* PANEL 2 — TECHNICAL MILESTONES (Span 7) */}
-          {/* ========================================================================= */}
-          <div className="lg:col-span-7 flex flex-col space-y-6">
-            
-            {/* Panel Header */}
-            <div className="flex items-center justify-between pb-3 border-b border-white/10">
-              <div className="space-y-1">
-                <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-red-500 px-2 py-0.5 rounded bg-red-600/10 border border-red-600/30">
-                  TIER 02 // ENGINEERING PROWESS
-                </span>
-                <h3 className="text-2xl font-black text-white tracking-tight pt-1">
-                  TECHNICAL MILESTONES
-                </h3>
-              </div>
-              <span className="text-xs font-mono text-white/40">4 VERIFIED</span>
-            </div>
-
-            {/* Technical Milestone Cards Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              {technicalAchievements.map((item, index) => (
                 <div
                   key={index}
                   className="achievement-card-wrapper relative perspective-[1200px]"
@@ -376,13 +294,13 @@ const Achievements = () => {
 
                   {/* 3D Flipping Card Container */}
                   <div
-                    className="achievement-card relative p-6 rounded-[22px] bg-gradient-to-br from-[#19090b] via-[#111111] to-[#080808] border border-white/10 backdrop-blur-2xl shadow-[0_20px_45px_rgba(0,0,0,0.85)] hover:border-red-600/60 transition-colors duration-300 overflow-hidden transform-gpu will-change-transform flex flex-col justify-between min-h-[260px]"
+                    className="achievement-card relative p-6 md:p-7 rounded-[22px] bg-gradient-to-br from-[#1d0a0c] via-[#121212] to-[#0a0a0a] border border-white/10 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.85)] hover:border-red-600/60 transition-colors duration-300 overflow-hidden transform-gpu will-change-transform flex flex-col justify-between min-h-[240px]"
                   >
                     {/* Real-Time Magnetic Mouse Spotlight */}
                     <div
                       className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"
                       style={{
-                        background: 'radial-gradient(350px circle at var(--mouse-x) var(--mouse-y), rgba(229,9,20,0.18), transparent 70%)'
+                        background: 'radial-gradient(400px circle at var(--mouse-x) var(--mouse-y), rgba(229,9,20,0.18), transparent 70%)'
                       }}
                     />
 
@@ -398,7 +316,119 @@ const Achievements = () => {
                     />
 
                     {/* Locked State Overlay Badge */}
-                    <div className="achievement-lock-overlay absolute top-4 right-4 flex items-center gap-1 px-2 py-0.5 rounded-full bg-black/80 border border-white/20 text-white/50 text-[9px] font-mono uppercase tracking-widest z-20">
+                    <div className="achievement-lock-overlay absolute top-4 right-4 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/80 border border-white/20 text-white/50 text-[10px] font-mono uppercase tracking-widest z-20">
+                      <svg className="w-3 h-3 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" strokeWidth="2" />
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4" strokeWidth="2" />
+                      </svg>
+                      <span>LOCKED</span>
+                    </div>
+
+                    {/* Unlocked State Badge (Checkmark / Star) */}
+                    <div className="achievement-unlocked-badge absolute top-4 right-4 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-red-600/20 border border-red-500/50 text-red-400 text-[10px] font-mono font-bold uppercase tracking-widest z-20 shadow-[0_0_15px_rgba(229,9,20,0.4)]">
+                      <svg className="w-3.5 h-3.5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                      <span>UNLOCKED</span>
+                    </div>
+
+                    {/* Card Content */}
+                    <div className="relative z-10 space-y-3">
+                      <div className="flex items-center gap-3">
+                        <div className="w-9 h-9 rounded-xl bg-red-600/10 border border-red-600/30 flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(229,9,20,0.2)]">
+                          {item.icon}
+                        </div>
+                        <div className="space-y-0.5">
+                          <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-red-400 block">
+                            {item.category}
+                          </span>
+                          <span className="text-[11px] font-mono text-white/40">
+                            {item.tag}
+                          </span>
+                        </div>
+                      </div>
+
+                      <h4 className="text-lg md:text-xl font-black text-white tracking-tight leading-snug hover:text-red-500 transition-colors">
+                        {item.title}
+                      </h4>
+
+                      <p className="text-xs text-white/70 font-light leading-relaxed">
+                        {item.detail}
+                      </p>
+                    </div>
+
+                    {/* Card Bottom Official Standing */}
+                    <div className="relative z-10 pt-3 mt-3 border-t border-white/10 flex items-center justify-between">
+                      <span className="text-[10px] font-mono text-white/40 uppercase tracking-wider">
+                        Official Standing:
+                      </span>
+                      <span className="px-2.5 py-0.5 rounded-lg bg-red-600/15 border border-red-600/40 text-xs font-mono font-bold text-red-400 shadow-[0_0_12px_rgba(229,9,20,0.3)]">
+                        {item.metric}
+                      </span>
+                    </div>
+
+                    {/* Corner Accent Dot */}
+                    <div className="absolute bottom-2.5 right-2.5 w-1.5 h-1.5 rounded-full bg-red-600 shadow-[0_0_8px_#E50914]" />
+                  </div>
+                </div>
+              ))}
+            </div>
+
+          </div>
+
+          {/* ========================================================================= */}
+          {/* PANEL 2 — TECHNICAL MILESTONES */}
+          {/* ========================================================================= */}
+          <div className="flex flex-col space-y-5">
+            
+            {/* Panel Header */}
+            <div className="flex items-center justify-between pb-3 border-b border-white/10">
+              <div className="space-y-1">
+                <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-red-500 px-2 py-0.5 rounded bg-red-600/10 border border-red-600/30">
+                  TIER 02 // PRODUCTION
+                </span>
+                <h3 className="text-xl md:text-2xl font-black text-white tracking-tight pt-1">
+                  TECHNICAL MILESTONES
+                </h3>
+              </div>
+              <span className="text-xs font-mono text-white/40">4 VERIFIED</span>
+            </div>
+
+            {/* Technical Milestone Cards Grid */}
+            <div className="flex flex-col gap-4">
+              {technicalAchievements.map((item, index) => (
+                <div
+                  key={index}
+                  className="achievement-card-wrapper relative perspective-[1200px]"
+                >
+                  {/* Glowing Outline Pulse Effect on Unlock */}
+                  <div className="achievement-glow absolute -inset-0.5 rounded-[20px] bg-gradient-to-r from-red-600 via-rose-500 to-red-600 opacity-0 pointer-events-none blur-md z-0" />
+
+                  {/* 3D Flipping Card Container */}
+                  <div
+                    className="achievement-card relative p-4 md:p-4.5 rounded-[18px] bg-gradient-to-br from-[#19090b] via-[#111111] to-[#080808] border border-white/10 backdrop-blur-2xl shadow-[0_15px_35px_rgba(0,0,0,0.85)] hover:border-red-600/60 transition-colors duration-300 overflow-hidden transform-gpu will-change-transform flex flex-col justify-between"
+                  >
+                    {/* Real-Time Magnetic Mouse Spotlight */}
+                    <div
+                      className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"
+                      style={{
+                        background: 'radial-gradient(300px circle at var(--mouse-x) var(--mouse-y), rgba(229,9,20,0.18), transparent 70%)'
+                      }}
+                    />
+
+                    {/* Top Crimson Accent Stripe */}
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-[2px] bg-gradient-to-r from-transparent via-red-600 to-transparent z-10" />
+
+                    {/* Diagonal Loot-Box Unlock Shine Sweep */}
+                    <div
+                      className="achievement-shine absolute inset-0 pointer-events-none z-30 opacity-0 rounded-[18px]"
+                      style={{
+                        background: 'linear-gradient(115deg, transparent 20%, rgba(255,255,255,0.4) 45%, rgba(229,9,20,0.6) 50%, rgba(255,255,255,0.4) 55%, transparent 80%)'
+                      }}
+                    />
+
+                    {/* Locked State Overlay Badge */}
+                    <div className="achievement-lock-overlay absolute top-3.5 right-3.5 flex items-center gap-1 px-2 py-0.5 rounded-full bg-black/80 border border-white/20 text-white/50 text-[9px] font-mono uppercase tracking-widest z-20">
                       <svg className="w-2.5 h-2.5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <rect x="3" y="11" width="18" height="11" rx="2" ry="2" strokeWidth="2" />
                         <path d="M7 11V7a5 5 0 0 1 10 0v4" strokeWidth="2" />
@@ -407,7 +437,7 @@ const Achievements = () => {
                     </div>
 
                     {/* Unlocked State Badge (Checkmark / Star) */}
-                    <div className="achievement-unlocked-badge absolute top-4 right-4 flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-red-600/20 border border-red-500/50 text-red-400 text-[9px] font-mono font-bold uppercase tracking-widest z-20 shadow-[0_0_12px_rgba(229,9,20,0.35)]">
+                    <div className="achievement-unlocked-badge absolute top-3.5 right-3.5 flex items-center gap-1 px-2 py-0.5 rounded-full bg-red-600/20 border border-red-500/50 text-red-400 text-[9px] font-mono font-bold uppercase tracking-widest z-20 shadow-[0_0_10px_rgba(229,9,20,0.35)]">
                       <svg className="w-3 h-3 text-red-500" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                       </svg>
@@ -415,42 +445,134 @@ const Achievements = () => {
                     </div>
 
                     {/* Card Content Top */}
-                    <div className="relative z-10 space-y-3">
-                      <div className="flex items-center gap-2.5">
-                        <div className="w-9 h-9 rounded-lg bg-red-600/10 border border-red-600/30 flex items-center justify-center shrink-0">
+                    <div className="relative z-10 space-y-2">
+                      <div className="flex items-center gap-2">
+                        <div className="w-7 h-7 rounded-lg bg-red-600/10 border border-red-600/30 flex items-center justify-center shrink-0">
                           {item.icon}
                         </div>
-                        <div>
-                          <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-red-400 block">
-                            {item.category}
-                          </span>
-                          <span className="text-[10px] font-mono text-white/40">
-                            {item.tag}
-                          </span>
-                        </div>
+                        <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-red-400">
+                          {item.category}
+                        </span>
                       </div>
 
-                      <h4 className="text-lg md:text-xl font-black text-white tracking-tight leading-snug">
+                      <h4 className="text-sm md:text-base font-bold text-white tracking-tight leading-snug">
                         {item.title}
                       </h4>
 
-                      <p className="text-xs text-white/70 font-light leading-relaxed line-clamp-3">
+                      <p className="text-xs text-white/65 font-light leading-relaxed">
                         {item.detail}
                       </p>
                     </div>
 
                     {/* Card Content Bottom */}
-                    <div className="relative z-10 pt-3 mt-3 border-t border-white/10 flex items-center justify-between">
+                    <div className="relative z-10 pt-2.5 mt-2 border-t border-white/10 flex items-center justify-between">
                       <span className="text-[10px] font-mono text-white/40 uppercase tracking-wider">
-                        Verified Metric:
+                        Metric:
                       </span>
-                      <span className="px-2.5 py-0.5 rounded bg-white/5 border border-white/15 text-[11px] font-mono font-bold text-red-400 shadow-inner">
+                      <span className="px-2 py-0.5 rounded bg-white/5 border border-white/15 text-[10px] font-mono font-bold text-red-400">
                         {item.metric}
                       </span>
                     </div>
 
                     {/* Corner Accent Dot */}
-                    <div className="absolute bottom-2.5 right-2.5 w-1.5 h-1.5 rounded-full bg-red-600 shadow-[0_0_8px_#E50914]" />
+                    <div className="absolute bottom-2 right-2 w-1 h-1 rounded-full bg-red-600 shadow-[0_0_6px_#E50914]" />
+                  </div>
+                </div>
+              ))}
+            </div>
+
+          </div>
+
+          {/* ========================================================================= */}
+          {/* PANEL 3 — CERTIFICATIONS (Compact Text/Badge Grid) */}
+          {/* ========================================================================= */}
+          <div className="flex flex-col space-y-5">
+            
+            {/* Panel Header */}
+            <div className="flex items-center justify-between pb-3 border-b border-white/10">
+              <div className="space-y-1">
+                <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-red-500 px-2 py-0.5 rounded bg-red-600/10 border border-red-600/30">
+                  TIER 03 // CREDENTIALS
+                </span>
+                <h3 className="text-xl md:text-2xl font-black text-white tracking-tight pt-1">
+                  CERTIFICATIONS
+                </h3>
+              </div>
+              <span className="text-xs font-mono text-white/40">4 VERIFIED</span>
+            </div>
+
+            {/* Certification Compact Badge / Rows */}
+            <div className="flex flex-col gap-4">
+              {certificationAchievements.map((item, index) => (
+                <div
+                  key={index}
+                  className="achievement-card-wrapper relative perspective-[1200px]"
+                >
+                  {/* Glowing Outline Pulse Effect on Unlock */}
+                  <div className="achievement-glow absolute -inset-0.5 rounded-[18px] bg-gradient-to-r from-red-600 via-rose-500 to-red-600 opacity-0 pointer-events-none blur-sm z-0" />
+
+                  {/* 3D Flipping Compact Badge Container */}
+                  <div
+                    className="achievement-card relative p-4 rounded-[16px] bg-gradient-to-br from-[#160a0c] via-[#101010] to-[#080808] border border-white/10 backdrop-blur-2xl shadow-[0_15px_30px_rgba(0,0,0,0.8)] hover:border-red-600/60 transition-colors duration-300 overflow-hidden transform-gpu will-change-transform flex flex-col justify-between"
+                  >
+                    {/* Real-Time Magnetic Mouse Spotlight */}
+                    <div
+                      className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"
+                      style={{
+                        background: 'radial-gradient(280px circle at var(--mouse-x) var(--mouse-y), rgba(229,9,20,0.16), transparent 70%)'
+                      }}
+                    />
+
+                    {/* Top Crimson Accent Stripe */}
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-14 h-[1.5px] bg-gradient-to-r from-transparent via-red-600 to-transparent z-10" />
+
+                    {/* Diagonal Loot-Box Unlock Shine Sweep */}
+                    <div
+                      className="achievement-shine absolute inset-0 pointer-events-none z-30 opacity-0 rounded-[16px]"
+                      style={{
+                        background: 'linear-gradient(115deg, transparent 20%, rgba(255,255,255,0.4) 45%, rgba(229,9,20,0.6) 50%, rgba(255,255,255,0.4) 55%, transparent 80%)'
+                      }}
+                    />
+
+                    {/* Locked State Overlay Badge */}
+                    <div className="achievement-lock-overlay absolute top-3 right-3 flex items-center gap-1 px-2 py-0.5 rounded-full bg-black/80 border border-white/20 text-white/50 text-[9px] font-mono uppercase tracking-widest z-20">
+                      <svg className="w-2.5 h-2.5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" strokeWidth="2" />
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4" strokeWidth="2" />
+                      </svg>
+                      <span>LOCKED</span>
+                    </div>
+
+                    {/* Unlocked State Badge (Checkmark / Star) */}
+                    <div className="achievement-unlocked-badge absolute top-3 right-3 flex items-center gap-1 px-2 py-0.5 rounded-full bg-red-600/20 border border-red-500/50 text-red-400 text-[9px] font-mono font-bold uppercase tracking-widest z-20 shadow-[0_0_10px_rgba(229,9,20,0.35)]">
+                      <svg className="w-3 h-3 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                      <span>UNLOCKED</span>
+                    </div>
+
+                    {/* Compact Badge Content */}
+                    <div className="relative z-10 space-y-1.5 pr-14">
+                      <span className="text-[9px] font-mono font-bold uppercase tracking-wider text-red-400 block">
+                        {item.category}
+                      </span>
+                      <h4 className="text-xs md:text-sm font-bold text-white tracking-tight leading-snug hover:text-red-500 transition-colors">
+                        {item.title}
+                      </h4>
+                    </div>
+
+                    {/* Issuer + Date Row (Smaller/muted below) */}
+                    <div className="relative z-10 pt-2.5 mt-2 border-t border-white/10 flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono">
+                      <span className="text-white/75 font-medium truncate max-w-[170px]">
+                        {item.issuer}
+                      </span>
+                      <span className="text-red-400/90 font-semibold shrink-0">
+                        {item.date}
+                      </span>
+                    </div>
+
+                    {/* Corner Accent Dot */}
+                    <div className="absolute bottom-2 right-2 w-1 h-1 rounded-full bg-red-600 shadow-[0_0_6px_#E50914]" />
                   </div>
                 </div>
               ))}
